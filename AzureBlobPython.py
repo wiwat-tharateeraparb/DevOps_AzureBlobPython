@@ -29,9 +29,6 @@ except Exception as ex:
 #connect_str = os.getenv('AZURE_STORAGE_CONNECTION_STRING')
 #connect_str = "DefaultEndpointsProtocol=https;AccountName=dfqualifstoracc;AccountKey=nFZkuZ8pqKyJsvpu8VddsaAMVhjCCKY5BqT8TXHQYVWwF70VDYBhPArEMvJ8Wk4o0XS11/oWdfaRSpbI6rP7mQ==;EndpointSuffix=core.windows.net"
 
-# Create BlobServiceClient object
-blob_service_client = BlobServiceClient.from_connection_string(connect_str).get_container_client(container_name)
-
 account_name = 'dfqualifstoracc'
 account_key = 'nFZkuZ8pqKyJsvpu8VddsaAMVhjCCKY5BqT8TXHQYVWwF70VDYBhPArEMvJ8Wk4o0XS11/oWdfaRSpbI6rP7mQ=='
 connect_str = 'DefaultEndpointsProtocol=https;AccountName=dfqualifstoracc;AccountKey=nFZkuZ8pqKyJsvpu8VddsaAMVhjCCKY5BqT8TXHQYVWwF70VDYBhPArEMvJ8Wk4o0XS11/oWdfaRSpbI6rP7mQ==;EndpointSuffix=core.windows.net'
@@ -40,6 +37,9 @@ container_name = 'media-dfpoc1'
 file_path = '/raw/FAS/PAT'
 block_blob_service = BlockBlobService(account_name = account_name, account_key = account_key)
 blob_service_client = BlobServiceClient(account_url = account_url)
+
+# Create BlobServiceClient object
+blob_service_client = BlobServiceClient.from_connection_string(connect_str).get_container_client(container_name)
 
 
 # process the size of blob
