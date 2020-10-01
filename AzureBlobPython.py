@@ -30,11 +30,7 @@ except Exception as ex:
 #connect_str = "DefaultEndpointsProtocol=https;AccountName=dfqualifstoracc;AccountKey=nFZkuZ8pqKyJsvpu8VddsaAMVhjCCKY5BqT8TXHQYVWwF70VDYBhPArEMvJ8Wk4o0XS11/oWdfaRSpbI6rP7mQ==;EndpointSuffix=core.windows.net"
 
 # Create BlobServiceClient object
-#blob_service_client = BlobServiceClient.from_connection_string(connect_str)
-
-#containers_list = blob_service_client.list_containers
-
-#print(containers_list)
+blob_service_client = BlobServiceClient.from_connection_string(connect_str).get_container_client(container_name)
 
 account_name = 'dfqualifstoracc'
 account_key = 'nFZkuZ8pqKyJsvpu8VddsaAMVhjCCKY5BqT8TXHQYVWwF70VDYBhPArEMvJ8Wk4o0XS11/oWdfaRSpbI6rP7mQ=='
@@ -70,7 +66,10 @@ def process_blob_target_name(blob):
     return target_blob_name
 
 def list_filenames_in_blob(blob):
-    file_names = blob_service_client.ls_files(file_path)
+    file_names = []
+    blob_iter = blob_service_client.list_blobs(name_starts_with=file_path)
+    for blob in blob_iter:
+        file_names.append(blob.name)
     return file_names
 
 
