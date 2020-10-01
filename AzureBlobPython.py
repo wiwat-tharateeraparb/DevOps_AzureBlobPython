@@ -2,20 +2,30 @@
 # conda install -c anaconda azure 
 # conda install -c conda-forge azure-storage-blob
 # conda install -c conda-forge azure-nspkg
-# Connection string: DefaultEndpointsProtocol=https;AccountName=dfqualifstoracc;AccountKey=nFZkuZ8pqKyJsvpu8VddsaAMVhjCCKY5BqT8TXHQYVWwF70VDYBhPArEMvJ8Wk4o0XS11/oWdfaRSpbI6rP7mQ==;EndpointSuffix=core.windows.net
+# Connection string:
 
-# blob = BlobClient(account_url = "https://dfqualifstoracc.blob.core.windows.net/media-dfpoc1",
-#                 container_name = "media-dfpoc1",
-#                 blob_name = "dfqualifstoracc",
-#                 credential = "nFZkuZ8pqKyJsvpu8VddsaAMVhjCCKY5BqT8TXHQYVWwF70VDYBhPArEMvJ8Wk4o0XS11/oWdfaRSpbI6rP7mQ==")
+
 
 import os, uuid, sys
 from azure.storage.blob import BlobClient, BlobServiceClient, ContainerClient, PublicAccess, __version__
 from azure.storage.blob.blockblobservice import BlockBlobService
 import re
 
+account_name = 'dfqualifstoracc'
+account_key = 'ACCOUNT_KEY'
+connect_str = os.getenv('AZURE_STORAGE_CONNECTION_STRING')
+#connect_str = 'CONNECTION_STRING'
+account_url = 'ACCOUNT_URL'
+container_name = 'media-dfpoc1'
+file_path = '/raw/FAS/PAT'
+#block_blob_service = BlockBlobService(account_name = account_name, account_key = account_key)
+#blob_service_client = BlobServiceClient(account_url = account_url)
+
 try:
     print("Azure Blob Storage v" + __version__ + " - Python sample")
+
+    
+
 except Exception as ex:
     print('Exception:')
     print(ex)
@@ -26,18 +36,12 @@ except Exception as ex:
 # created after the application is launched in a console or with Visual Studio,
 # the shell or application needs to be closed and reloaded to take the
 # environment variable into account.
-#connect_str = os.getenv('AZURE_STORAGE_CONNECTION_STRING')
-#connect_str = "DefaultEndpointsProtocol=https;AccountName=dfqualifstoracc;AccountKey=nFZkuZ8pqKyJsvpu8VddsaAMVhjCCKY5BqT8TXHQYVWwF70VDYBhPArEMvJ8Wk4o0XS11/oWdfaRSpbI6rP7mQ==;EndpointSuffix=core.windows.net"
 
-account_name = 'dfqualifstoracc'
-account_key = 'nFZkuZ8pqKyJsvpu8VddsaAMVhjCCKY5BqT8TXHQYVWwF70VDYBhPArEMvJ8Wk4o0XS11/oWdfaRSpbI6rP7mQ=='
-connect_str = 'DefaultEndpointsProtocol=https;AccountName=dfqualifstoracc;AccountKey=nFZkuZ8pqKyJsvpu8VddsaAMVhjCCKY5BqT8TXHQYVWwF70VDYBhPArEMvJ8Wk4o0XS11/oWdfaRSpbI6rP7mQ==;EndpointSuffix=core.windows.net'
-account_url = 'https://dfqualifstoracc.blob.core.windows.net/media-dfpoc1?sv=2019-10-10&st=2020-10-01T11%3A50%3A32Z&se=2020-10-02T11%3A50%3A32Z&sr=c&sp=rl&sig=dAhIFJ1pZF6i87aqtg6jT5Sp6tIKjUAmII73tVfX%2FRo%3D'
-container_name = 'media-dfpoc1'
-file_path = '/raw/FAS/PAT'
-block_blob_service = BlockBlobService(account_name = account_name, account_key = account_key)
-blob_service_client = BlobServiceClient(account_url = account_url)
 
+
+
+
+'''
 # Create BlobServiceClient object
 blob_service_client = BlobServiceClient.from_connection_string(connect_str).get_container_client(container_name)
 
@@ -102,7 +106,7 @@ def run_action():
             file_names_list = list_filenames_in_blob(blob)
             print(file_names_list)
             return file_names_list
-            '''
+            
             if blob.name.startswith('raw'):
                 display_blobs(blob)
 
@@ -115,7 +119,7 @@ def run_action():
                     process_blob_target_name(blob),
                     process_blob_url(blob),
                 )
-            '''
+            
 
         
 
@@ -125,4 +129,4 @@ def run_action():
 # Main method.
 if __name__ == '__main__':
     run_action()
-
+'''
