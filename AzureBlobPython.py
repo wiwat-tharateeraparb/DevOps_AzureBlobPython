@@ -105,7 +105,6 @@ def run_action():
         for blob in generator:
             file_names_list = list_filenames_in_blob(blob)
             print(file_names_list)
-            return file_names_list
             
             if blob.name.startswith('raw'):
                 display_blobs(blob)
