@@ -92,14 +92,17 @@ def run_action():
         # Upload the created file, use local_file_name for the blob name
         block_blob_service.create_blob_from_path(container_name, blob_container_file_path, full_path_to_file)
         """
-
+        file_names_list = []
 
         # List the blobs in the container
         print("\nList blobs in the container")
         generator = block_blob_service.list_blobs(container_name)
 
         for blob in generator:
-            list_filenames_in_blob(blob)
+            file_names_list = list_filenames_in_blob(blob)
+            print(file_names_list)
+            return file_names_list
+            '''
             if blob.name.startswith('raw'):
                 display_blobs(blob)
 
@@ -112,6 +115,7 @@ def run_action():
                     process_blob_target_name(blob),
                     process_blob_url(blob),
                 )
+            '''
 
         
 
